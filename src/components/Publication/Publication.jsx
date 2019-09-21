@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Publication.module.css";
 
-const Publication = ({ title, text }) => {
+const Publication = ({ items }) => {
+  const { title, text } = items;
+
   return (
     <article className={styles.publication}>
       <h2 className={styles.title}>{title}</h2>
@@ -12,8 +14,10 @@ const Publication = ({ title, text }) => {
 };
 
 Publication.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  items: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Publication;
