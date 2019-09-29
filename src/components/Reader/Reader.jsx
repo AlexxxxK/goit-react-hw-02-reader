@@ -16,26 +16,27 @@ export default class Reader extends Component {
     ).isRequired,
   };
 
-  state = { index: 0 };
+  state = { currentPage: 0 };
 
   handlePublicationChange = ({ target }) => {
     const { name } = target;
 
     this.setState(prevState => ({
-      index: name === "prev" ? prevState.index - 1 : prevState.index + 1,
+      currentPage:
+        name === "prev" ? prevState.currentPage - 1 : prevState.currentPage + 1,
     }));
   };
 
   render() {
-    const { index } = this.state;
+    const { currentPage } = this.state;
     const { items } = this.props;
 
     return (
       <div className={styles.reader}>
-        <Publication item={items[index]} />
-        <Counter index={index} length={items.length} />
+        <Publication item={items[currentPage]} />
+        <Counter currentPage={currentPage} length={items.length} />
         <Controls
-          index={index}
+          currentPage={currentPage}
           length={items.length}
           handlePublicationChange={this.handlePublicationChange}
         />
